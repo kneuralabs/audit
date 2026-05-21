@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow" cx="30%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#0071e3" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#050505"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Neural network decoration (right) -->
+  <line x1="880" y1="160" x2="970" y2="250" stroke="#0071e3" stroke-width="1.2" opacity="0.18"/>
+  <line x1="970" y1="250" x2="1080" y2="200" stroke="#0071e3" stroke-width="1.2" opacity="0.18"/>
+  <line x1="1080" y1="200" x2="1140" y2="310" stroke="#0071e3" stroke-width="1.2" opacity="0.14"/>
+  <line x1="970" y1="250" x2="1010" y2="380" stroke="#0071e3" stroke-width="1.2" opacity="0.18"/>
+  <line x1="1010" y1="380" x2="1100" y2="440" stroke="#0071e3" stroke-width="1.2" opacity="0.14"/>
+  <line x1="1010" y1="380" x2="930" y2="470" stroke="#0071e3" stroke-width="1.2" opacity="0.14"/>
+  <line x1="880" y1="160" x2="1080" y2="200" stroke="#0071e3" stroke-width="1" opacity="0.1"/>
+  <line x1="1140" y1="310" x2="1100" y2="440" stroke="#0071e3" stroke-width="1" opacity="0.1"/>
+  <circle cx="880" cy="160" r="6" fill="#0a84ff" opacity="0.45"/>
+  <circle cx="970" cy="250" r="7.5" fill="#0071e3" opacity="0.55"/>
+  <circle cx="1080" cy="200" r="5.5" fill="#0a84ff" opacity="0.35"/>
+  <circle cx="1140" cy="310" r="4.5" fill="#0071e3" opacity="0.25"/>
+  <circle cx="1010" cy="380" r="7" fill="#0a84ff" opacity="0.5"/>
+  <circle cx="1100" cy="440" r="5" fill="#0071e3" opacity="0.3"/>
+  <circle cx="930" cy="470" r="4" fill="#0071e3" opacity="0.22"/>
+
+  <!-- Logo mark -->
+  <rect x="80" y="165" width="72" height="72" rx="16" fill="#1c1c1e"/>
+  <path d="M102 182v38M102 201l19-19M102 201l19 19" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="144" cy="183" r="8" fill="#0a84ff"/>
+
+  <!-- Main title -->
+  <text x="172" y="225" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="58" font-weight="700" fill="#f5f5f7" letter-spacing="-2.5">KNEURAUDIT™</text>
+
+  <!-- Subtitle -->
+  <text x="172" y="268" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="20" font-weight="400" fill="#6e6e73" letter-spacing="0.2">CAPA SLA Audit Workflow &amp; Protected Excel Export</text>
+
+  <!-- Feature badges -->
+  <rect x="172" y="306" width="148" height="30" rx="15" fill="#1c1c1e" stroke="#2c2c2e" stroke-width="1"/>
+  <text x="246" y="325" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#aeaeb2" text-anchor="middle">ISO 20000:2018</text>
+
+  <rect x="330" y="306" width="148" height="30" rx="15" fill="#1c1c1e" stroke="#2c2c2e" stroke-width="1"/>
+  <text x="404" y="325" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#aeaeb2" text-anchor="middle">ISO 42001:2023</text>
+
+  <rect x="488" y="306" width="170" height="30" rx="15" fill="#1c1c1e" stroke="#2c2c2e" stroke-width="1"/>
+  <text x="573" y="325" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="12.5" font-weight="500" fill="#aeaeb2" text-anchor="middle">AIMS AI Framework</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="410" x2="700" y2="410" stroke="#1e1e1e" stroke-width="1"/>
+
+  <!-- Bottom URL -->
+  <text x="80" y="450" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="15" font-weight="400" fill="#3a3a3c" letter-spacing="0.3">audit.kneuralabs.com</text>
+
+  <!-- kNeura brand -->
+  <text x="1120" y="600" font-family="Inter,-apple-system,system-ui,Helvetica,sans-serif" font-size="13" font-weight="400" fill="#2c2c2e" text-anchor="end">by kNeura Labs</text>
+</svg>
