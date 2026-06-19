@@ -140,12 +140,35 @@
        2. CORE UTILITIES
        ======================================================== */
 
-    /** ISO-ish stamp "YYYY-MM-DD HH:MM:SS" used for timestamp + export meta. */
-    function nowStamp() {
-        return new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const pad2 = (n) => String(n).padStart(2, '0');
+
+    /**
+     * Local-time stamp "YYYY-MM-DD HH:MM:SS", built from local calendar fields.
+     * NOT toISOString() — that returns UTC, which (when later parsed back as
+     * local time) shifted the SLA base by the machine's UTC offset and made the
+     * exported due date off by a day for evening users in negative-offset zones.
+     */
+    function formatLocalStamp(date) {
+        return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} `
+             + `${pad2(date.getHours())}:${pad2(date.getMinutes())}:${pad2(date.getSeconds())}`;
     }
 
-    /** Parse a "YYYY-MM-DD HH:MM:SS" stamp back into a Date. */
+    /** Local-time date "YYYY-MM-DD" (no UTC round-trip). */
+    function formatLocalDate(date) {
+        return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+    }
+
+    /** Midnight of the given date in local time — basis for calendar-day math. */
+    function localMidnight(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+
+    /** Current local stamp "YYYY-MM-DD HH:MM:SS" (timestamp + export meta). */
+    function nowStamp() {
+        return formatLocalStamp(new Date());
+    }
+
+    /** Parse a local "YYYY-MM-DD HH:MM:SS" stamp back into a Date (local frame). */
     function parseStamp(stamp) {
         return new Date(String(stamp).replace(' ', 'T'));
     }
@@ -180,14 +203,20 @@
         const hasDeadline = days !== NO_DEADLINE;
         const validBase = baseDate instanceof Date && !isNaN(baseDate.getTime());
         const dueDate = (hasDeadline && validBase) ? addDays(baseDate, days) : null;
+        // Day math on local calendar dates (midnight-normalized) so it is
+        // timezone- and DST-stable and matches the auditor's wall calendar.
+        // Round absorbs the ±1h that a DST transition adds to a 24h span.
+        const diffDays = dueDate
+            ? Math.round((localMidnight(dueDate) - localMidnight(now)) / 86400000)
+            : null;
         return {
             days,
             hasDeadline,
             validBase,
             dueDate,
-            isOverdue: !!dueDate && now > dueDate,
-            // ceil-day delta used by the live chip
-            diffDays: dueDate ? Math.ceil((dueDate - now) / 86400000) : null
+            // Overdue once the calendar has moved past the due date.
+            isOverdue: diffDays != null && diffDays < 0,
+            diffDays
         };
     }
 
@@ -639,7 +668,7 @@
         rowsData.forEach((f, idx) => {
             const r = DATA_START_ROW + idx;
             const sla = computeSla(baseDate, f.category, today);
-            const dueDateStr = sla.hasDeadline ? sla.dueDate.toISOString().slice(0, 10) : 'N/A';
+            const dueDateStr = sla.hasDeadline ? formatLocalDate(sla.dueDate) : 'N/A';
             const slaStatus  = !sla.hasDeadline ? 'No lock' : (sla.isOverdue ? 'OVERDUE' : 'On track');
 
             // Auto-fill empty CA/PA once the SLA has expired.
